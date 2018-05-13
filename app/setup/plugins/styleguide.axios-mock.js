@@ -6,6 +6,7 @@ import { axios } from './axios';
 import cSuggestions from '../../styleguide/mock-data/cSuggestions';
 import cProductErp from '../../styleguide/mock-data/cProductErp';
 import cCartPost from '../../styleguide/mock-data/cCartPost';
+import cProductsPost from '../../styleguide/mock-data/cProductsPost';
 
 /**
  * By default returns a 500 'no route defined' error.
@@ -52,6 +53,7 @@ export default {
       .onGet('/suggestions').reply(200, cSuggestions)
       .onPost('/product/multi-get').reply(200, cProductErp)
       .onPost('/cart/1').reply(200, cCartPost)
+      .onPost('/product/1').reply(200, cProductsPost)
 
       .onAny(/\/?static/).passThrough()
       .onAny().reply(wildcard);

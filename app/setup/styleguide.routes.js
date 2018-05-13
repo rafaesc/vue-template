@@ -6,6 +6,7 @@ import headings from '../styleguide/routes/headings';
 import panels from '../styleguide/routes/panels';
 import buttons from '../styleguide/routes/buttons';
 import forms from '../styleguide/routes/forms';
+import productList from '../styleguide/routes/product-list';
 
 const root = '/styleguide';
 
@@ -75,6 +76,14 @@ export default [
     component: productDetail,
     meta: {
       title: 'Product Detail',
+    }
+  },
+  {
+    path: `${root}/product-list`,
+    name: 'styleguideProductList',
+    component: productList,
+    meta: {
+      title: 'Product list',
     }
   },
   {
