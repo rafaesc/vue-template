@@ -6,9 +6,8 @@
 
       <!-- left area -->
       <div :class="b('main', {area: 'top' })">
-
+        <e-info-label v-if="erp.priceType" :price-type="erp.priceType" :price-type-end-date="erp.priceTypeEndDate"/>
         <div :class="b('gallery')">
-          <e-info-label v-if="erp.priceType" :price-type="erp.priceType" :price-type-end-date="erp.priceTypeEndDate"/>
           gallery<br>
           {{ product }}
         </div>
@@ -24,7 +23,7 @@
             <c-prices :price-gross="erp.priceGross" :price="erp.price"/>
           </div>
           / qty /
-          <c-add-to-cart :sku="this.$props.sku" label/>
+          <c-add-to-cart :sku="this.product.sku" label/>
         </div>
       </aside>
 
@@ -67,15 +66,7 @@
     },
     // mixins: [],
 
-    props: {
-      /**
-       * The sku of the product
-       */
-      sku: {
-        type: String,
-        required: true,
-      },
-    },
+    // props: {},
     // data() {
     //   return {};
     // },
@@ -90,7 +81,7 @@
 
     // beforeCreate() {},
     created() {
-      this.fetchErp(this.$props.sku);
+      this.fetchErp();
     },
     // beforeMount() {},
     // mounted() {},
