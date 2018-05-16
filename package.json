@@ -75,6 +75,8 @@
     "axios": "~0.18.0",
     "babel-polyfill": "~6.26.0",
     "bootstrap": "~4.0.0",
+    "devextreme": "~18.1.2-pre-beta",
+    "devextreme-vue": "~18.1.2-alpha.3",
     "intersection-observer": "~0.5.0",
     "lazysizes": "~4.0.2",
     "picturefill": "~3.0.2",
