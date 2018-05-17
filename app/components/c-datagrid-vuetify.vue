@@ -1,52 +1,96 @@
 <template>
   <div :class="b()">
-    <h2>Data-Grid:</h2>
-    <dx-data-grid v-bind="gridOptions">
-      <div slot="cell-role" slot-scope="data">
-        <select>
-          <option v-for="role in roles"
-                  :key="role.key"
-                  :selected="role.key === data.value"
-                  value="role.key"
-          >
-            {{ role.label }}
-          </option>
-        </select>
+    <v-text-field
+      v-model="gridOptions.search"
+      append-icon="search"
+      label="Search"
+      single-line
+      hide-details
+    />
+    <v-data-table
+      v-model="selected"
+      v-bind="gridOptions"
+      select-all
+      item-key="name"
+    >
+      <template slot="items" slot-scope="props">
+        <tr :active="props.selected" @click="props.selected = !props.selected">
+          <td>
+            <v-checkbox
+              :input-value="props.selected"
+              primary
+              hide-details
+            />
+          </td>
+          <td class="text-xs-left">{{ props.item.name }}</td>
+          <td class="text-xs-left">{{ props.item.email }}</td>
+          <td class="text-xs-left">{{ props.item.role }}</td>
+          <td class="text-xs-left">{{ props.item.state }}</td>
+          <td class="text-xs-left">{{ props.item.approved }}</td>
+          <td class="text-xs-left">{{ props.item.documents }}</td>
+          <td class="text-xs-left">{{ props.item.edited }}</td>
+        </tr>
+      </template>
+      <div slot="no-results" :value="true">
+        Your search for "{{ gridOptions.search }}" found no results.
       </div>
-    </dx-data-grid>
-    <a href="https://js.devexpress.com/Documentation/ApiReference/UI_Widgets/dxDataGrid/" target="_blank">
-      Datagrid API
-    </a>
+    </v-data-table>
   </div>
 </template>
 
 <script>
-  import { DxDataGrid } from 'devextreme-vue';
+  import VCheckbox from 'vuetify/es5/components/VCheckbox';
+  import VAlert from 'vuetify/es5/components/VAlert';
+  import VTextField from 'vuetify/es5/components/VTextField';
+  import { VDataTable } from 'vuetify/es5/components/VDataTable';
 
   export default {
-    name: 'c-datagrid',
+    name: 'c-datagrid-vuetify',
     components: {
-      DxDataGrid,
+      VDataTable,
+      VCheckbox,
+      VTextField,
+      VAlert,
     },
     // mixins: [],
 
     // props: {},
     data() {
       return {
-        roles: [
-          {
-            label: 'User',
-            key: 'user',
-          },
-          {
-            label: 'Administrator',
-            key: 'admin',
-          },
-        ],
+        selected: [],
         gridOptions: {
-          columnHidingEnabled: true,
-          columnAutoWidth: true,
-          dataSource: [
+          search: '',
+          customFilter: (items, search, filter) => {
+            search = search.toString().toLowerCase();
+
+            return items.filter(row => filter(row['email'], search));
+          },
+          headers: [
+            {
+              text: 'Name',
+              align: 'left',
+              value: 'name'
+            }, {
+              text: 'Email',
+              value: 'email'
+            }, {
+              text: 'Role',
+              value: 'role'
+            }, {
+              text: 'State',
+              value: 'state'
+            }, {
+              text: 'Approved',
+              value: 'approved',
+            }, {
+              text: 'Documents',
+              value: 'documents'
+            }, {
+              text: 'Edited',
+              value: 'edited',
+            },
+          ],
+          items: [
             {
               name: 'Claudio Schäpper',
               email: 'claudio.schäpper@cec.valantic.com',
@@ -169,69 +213,7 @@
               edited: '01-01-1970',
             },
           ],
-          searchPanel: {
-            visible: true,
-          },
-          allowColumnResizing: true,
-          paging: {
-            pageSize: 10,
-          },
-          pager: {
-            showInfo: true,
-            showNavigationButtons: true,
-            showPageSizeSelector: true,
-          },
-          filterRow: {
-            visible: true,
-          },
-          editing: {
-            allowAdding: true,
-            allowUpdating: true,
-            allowDeleting: true,
-            mode: 'row',
-          },
-          selection: {
-            mode: 'multiple',
-            showCheckBoxesMode: 'always',
-          },
-          columns: [
-            {
-              dataField: 'name',
-              caption: 'Anzeige Namen',
-              fixed: true,
-              fixedPosition: 'left',
-            },
-            {
-              dataField: 'email',
-              caption: 'Email',
-            },
-            {
-              dataField: 'role',
-              caption: 'Benutzerrolle',
-
-              /* eslint-disable quotes */
-              cellTemplate: "cell-role", // has to be double quotes, otherwise it won't work.
-            },
-            {
-              dataField: 'state',
-              caption: 'Status',
-            },
-            {
-              dataField: 'approved',
-              caption: 'Fregegeben',
-            },
-            {
-              dataField: 'documents',
-              caption: 'Dokumente',
-            },
-            {
-              dataField: 'edited',
-              dataType: 'datetime',
-              caption: 'Editiert',
-              format: 'dd.MM.yyyy'
-            },
-          ],
-        },
+        }
       };
     },
 
@@ -255,7 +237,7 @@
 </script>
 
 <style lang="scss">
-  .c-datagrid {
+  .c-datagrid-vuetify {
   }
 
 </style>
