@@ -1,19 +1,14 @@
 <template>
   <div :class="b()">
     <h2>Data-Grid:</h2>
-    <dx-data-grid :data-source="items"
-                  :editing="gridOptions.editing"
-                  :columns="gridOptions.columns"
-                  :pager="gridOptions.pager"
-                  :paging="gridOptions.paging"
-                  :allow-column-resizing="gridOptions.allowColumnResizing"
-                  :filter-row="gridOptions.filterRow"
-                  :selection="gridOptions.selection"
-                  :column-min-width="50"
-    >
+    <dx-data-grid v-bind="gridOptions">
       <div slot="cell-role" slot-scope="data">
         <select>
-          <option v-for="role in roles" :key="role.key" :selected="role.key === data.value" value="role.key">
+          <option v-for="role in roles"
+                  :key="role.key"
+                  :selected="role.key === data.value"
+                  value="role.key"
+          >
             {{ role.label }}
           </option>
         </select>
@@ -38,129 +33,6 @@
     // props: {},
     data() {
       return {
-        items: [
-          {
-            name: 'Claudio Schäpper',
-            email: 'claudio.schäpper@cec.valantic.com',
-            role: 'user',
-            state: 'open',
-            approved: true,
-            documents: 'test.jpg',
-            edited: '12-05-2018',
-          }, {
-            name: 'Mathias Ober',
-            email: 'mathias.ober@cec.valantic.com',
-            role: 'user',
-            state: 'open',
-            approved: true,
-            documents: 'test.jpg',
-            edited: '13-05-2018',
-          }, {
-            name: 'Patric Eberle',
-            email: 'patric.eberle@cec.valantic.com',
-            role: 'admin',
-            state: 'open',
-            approved: true,
-            documents: 'test.jpg',
-            edited: '01-05-2018',
-          }, {
-            name: 'Silvan Baumann',
-            email: 'silvan.baumann@cec.valantic.com',
-            role: 'user',
-            state: 'open',
-            approved: true,
-            documents: 'test.jpg',
-            edited: '12-05-2018',
-          }, {
-            name: 'Cheryl Oberholzer',
-            email: 'cheryl.oberholzer@cec.valantic.com',
-            role: 'user',
-            state: 'open',
-            approved: true,
-            documents: 'test.jpg',
-            edited: '04-04-2018',
-          }, {
-            name: 'Christoph Hirschbühl',
-            email: 'christoph.hirschbühl@cec.valantic.com',
-            role: 'user',
-            state: 'open',
-            approved: true,
-            documents: 'test.jpg',
-            edited: '12-11-2017',
-          }, {
-            name: 'Test User',
-            email: 'test.user@somedomain.com',
-            role: 'user',
-            state: 'open',
-            approved: true,
-            documents: 'test.jpg',
-            edited: '24-05-2018',
-          }, {
-            name: 'Bruce Willis',
-            email: 'bruce.willis@somedomain.com',
-            role: 'user',
-            state: 'open',
-            approved: true,
-            documents: 'test.jpg',
-            edited: '12-05-2018',
-          }, {
-            name: 'Bruce Wayne',
-            email: 'bruce.wayne@somedomain.com',
-            role: 'user',
-            state: 'open',
-            approved: true,
-            documents: 'test.jpg',
-            edited: '12-05-2018',
-          }, {
-            name: 'Chuck Norris',
-            email: 'chuck.norris@somedomain.com',
-            role: 'user',
-            state: 'open',
-            approved: true,
-            documents: 'test.jpg',
-            edited: '12-05-2018',
-          }, {
-            name: 'Jason Bourne',
-            email: 'bourne@indenti.ty',
-            role: 'user',
-            state: 'open',
-            approved: true,
-            documents: 'test.jpg',
-            edited: '12-09-2016',
-          }, {
-            name: 'Lionel Messi',
-            email: 'leo.messi@somedomain.ar',
-            role: 'user',
-            state: 'open',
-            approved: true,
-            documents: 'test.jpg',
-            edited: '12-05-2018',
-          }, {
-            name: 'Max Mustermann',
-            email: 'max.musti@somedomain.com',
-            role: 'user',
-            state: 'open',
-            approved: true,
-            documents: 'test.jpg',
-            edited: '12-05-2018',
-          }, {
-            name: 'Jennifer Lopez',
-            email: 'lopez@j.lo',
-            role: 'user',
-            state: 'open',
-            approved: true,
-            documents: 'test.jpg',
-            edited: '12-10-2015',
-          }, {
-            name: 'Morgan Freeman',
-            email: 'dear@god.com',
-            role: 'user',
-            state: 'open',
-            approved: true,
-            documents: 'test.jpg',
-            edited: '01-01-1970',
-          },
-        ],
         roles: [
           {
             label: 'User',
@@ -172,6 +44,131 @@
           },
         ],
         gridOptions: {
+          columnHidingEnabled: true,
+          columnAutoWidth: true,
+          dataSource: [
+            {
+              name: 'Claudio Schäpper',
+              email: 'claudio.schäpper@cec.valantic.com',
+              role: 'user',
+              state: 'open',
+              approved: true,
+              documents: 'test.jpg',
+              edited: '12-05-2018',
+            }, {
+              name: 'Mathias Ober',
+              email: 'mathias.ober@cec.valantic.com',
+              role: 'user',
+              state: 'open',
+              approved: true,
+              documents: 'test.jpg',
+              edited: '13-05-2018',
+            }, {
+              name: 'Patric Eberle',
+              email: 'patric.eberle@cec.valantic.com',
+              role: 'admin',
+              state: 'open',
+              approved: true,
+              documents: 'test.jpg',
+              edited: '01-05-2018',
+            }, {
+              name: 'Silvan Baumann',
+              email: 'silvan.baumann@cec.valantic.com',
+              role: 'user',
+              state: 'open',
+              approved: true,
+              documents: 'test.jpg',
+              edited: '12-05-2018',
+            }, {
+              name: 'Cheryl Oberholzer',
+              email: 'cheryl.oberholzer@cec.valantic.com',
+              role: 'user',
+              state: 'open',
+              approved: true,
+              documents: 'test.jpg',
+              edited: '04-04-2018',
+            }, {
+              name: 'Christoph Hirschbühl',
+              email: 'christoph.hirschbühl@cec.valantic.com',
+              role: 'user',
+              state: 'open',
+              approved: true,
+              documents: 'test.jpg',
+              edited: '12-11-2017',
+            }, {
+              name: 'Test User',
+              email: 'test.user@somedomain.com',
+              role: 'user',
+              state: 'open',
+              approved: true,
+              documents: 'test.jpg',
+              edited: '24-05-2018',
+            }, {
+              name: 'Bruce Willis',
+              email: 'bruce.willis@somedomain.com',
+              role: 'user',
+              state: 'open',
+              approved: true,
+              documents: 'test.jpg',
+              edited: '12-05-2018',
+            }, {
+              name: 'Bruce Wayne',
+              email: 'bruce.wayne@somedomain.com',
+              role: 'user',
+              state: 'open',
+              approved: true,
+              documents: 'test.jpg',
+              edited: '12-05-2018',
+            }, {
+              name: 'Chuck Norris',
+              email: 'chuck.norris@somedomain.com',
+              role: 'user',
+              state: 'open',
+              approved: true,
+              documents: 'test.jpg',
+              edited: '12-05-2018',
+            }, {
+              name: 'Jason Bourne',
+              email: 'bourne@indenti.ty',
+              role: 'user',
+              state: 'open',
+              approved: true,
+              documents: 'test.jpg',
+              edited: '12-09-2016',
+            }, {
+              name: 'Lionel Messi',
+              email: 'leo.messi@somedomain.ar',
+              role: 'user',
+              state: 'open',
+              approved: true,
+              documents: 'test.jpg',
+              edited: '12-05-2018',
+            }, {
+              name: 'Max Mustermann',
+              email: 'max.musti@somedomain.com',
+              role: 'user',
+              state: 'open',
+              approved: true,
+              documents: 'test.jpg',
+              edited: '12-05-2018',
+            }, {
+              name: 'Jennifer Lopez',
+              email: 'lopez@j.lo',
+              role: 'user',
+              state: 'open',
+              approved: true,
+              documents: 'test.jpg',
+              edited: '12-10-2015',
+            }, {
+              name: 'Morgan Freeman',
+              email: 'dear@god.com',
+              role: 'user',
+              state: 'open',
+              approved: true,
+              documents: 'test.jpg',
+              edited: '01-01-1970',
+            },
+          ],
           searchPanel: {
             visible: true,
           },
@@ -191,7 +188,7 @@
             allowAdding: true,
             allowUpdating: true,
             allowDeleting: true,
-            mode: 'cell',
+            mode: 'row',
           },
           selection: {
             mode: 'multiple',
@@ -203,7 +200,6 @@
               caption: 'Anzeige Namen',
               fixed: true,
               fixedPosition: 'left',
-              minWidth: 150,
             },
             {
               dataField: 'email',
@@ -212,6 +208,7 @@
             {
               dataField: 'role',
               caption: 'Benutzerrolle',
+              /* eslint-disable quotes */
               cellTemplate: "cell-role", // has to be double quotes, otherwise it won't work.
             },
             {
