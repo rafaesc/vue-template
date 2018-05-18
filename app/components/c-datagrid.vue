@@ -21,7 +21,7 @@
 </template>
 
 <script>
-  import { DxDataGrid } from 'devextreme-vue';
+  import { DxDataGrid } from 'devextreme-vue/ui/data-grid';
 
   export default {
     name: 'c-datagrid',

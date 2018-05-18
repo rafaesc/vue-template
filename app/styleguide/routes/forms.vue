@@ -44,13 +44,17 @@
         :value="checkbox.value"
         :display-name="checkbox.value"/>
 
+      <c-datagrid/>
     </form>
   </div>
 </template>
 
 <script>
+  import CDatagrid from '@/components/c-datagrid';
+
   export default {
     name: 'forms',
+    components: { CDatagrid },
     data() {
       return {
         name: {
