@@ -1,25 +1,29 @@
 <template>
-
   <div :class="b(stateModifiers)">
-    <label
-      :class="b('label')"
-      @mouseenter="isHover = true"
-      @mouseleave="isHover = false">
-      <input
-        :aria-checked="isChecked ? 'true' : 'false'"
-        :class="b('field')"
-        :disabled="disabled"
-        :value="value"
-        :name="name"
-        v-bind="$attrs"
-        v-model="internalValue"
-        role="checkbox"
-        type="checkbox"
-        @blur="onBlur"
-        @change="onChange"
-        @focus="onFocus">
-      <span :class="b('label-name')">{{ displayName }}</span>
+
+    <input
+      :aria-checked="checked ? 'true' : 'false'"
+      :class="b('field')"
+      :disabled="disabled"
+      :value="value"
+      :name="name"
+      :id="uid"
+      v-bind="$attrs"
+      v-model="internalValue"
+      role="checkbox"
+      type="checkbox"
+      @blur="onBlur"
+      @change="onChange"
+      @focus="onFocus">
+
+    <label :for="uid"
+           :class="b('label')"
+           @mouseenter="isHover = true"
+           @mouseleave="isHover = false">
+      <!-- @slot Used for label text -->
+      <slot></slot>
     </label>
+
   </div>
 
 </template>
@@ -56,6 +60,7 @@
 
       /**
        * Adds name attribute
+       * Note: is also used as id and for label (won't work without them)
        */
       name: {
         type: String,
@@ -69,14 +74,6 @@
         type: String,
         required: true,
       },
-
-      /**
-       * Display name for the label
-       */
-      displayName: {
-        type: String,
-        required: true
-      }
     },
 
     // data() {
@@ -102,6 +99,15 @@
            */
           this.$emit('change', value);
         }
+      },
+
+      /**
+       * Creates a unique id for the label
+       *
+       * @returns  {String}   Unique id (uid)
+       */
+      uid() {
+        return this.name + Math.random();
       }
     },
     // watch: {},
@@ -176,8 +182,6 @@
 
 <style lang="scss">
   .e-checkbox {
-    @include font($font-size--14, 18px);
-
     &__field {
       position: absolute;
       left: -9999px;
@@ -186,18 +190,20 @@
 
     // general label
     &__label {
+      @include font-size($font-size--14);
+
       color: $color-grayscale--400;
       cursor: pointer;
       position: relative;
       padding-left: $spacing--25;
-      margin: 0;
+      line-height: 18px;
 
       // custom field
       &::before {
         background: $color-grayscale--1000;
         border-radius: 3px;
         border: 1px solid $color-grayscale--500;
-        content: '';
+        content: "";
         position: absolute;
         left: 0;
         top: 0;
@@ -212,7 +218,7 @@
         background-size: 20px;
         border-top: none;
         border-right: none;
-        content: '';
+        content: "";
         display: inline-block;
         position: absolute;
         top: 0;
@@ -282,4 +288,5 @@
       }
     }
   }
+
 </style>

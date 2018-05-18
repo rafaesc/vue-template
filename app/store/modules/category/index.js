@@ -1,4 +1,4 @@
-// store/modules/cart/index.js
+// store/modules/category/index.js
 
 export default {
   namespaced: true,

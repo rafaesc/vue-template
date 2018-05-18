@@ -9,6 +9,7 @@
       :value="value"
       :title="title"
       v-bind="$attrs"
+      type="text"
       @blur="onBlur"
       @focus="onFocus"
       @input="onInput"
@@ -45,7 +46,7 @@
        */
       value: {
         default: null,
-        type: [String, Number],
+        type: String,
       },
 
       /**
